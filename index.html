@@ -596,8 +596,8 @@ function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt
 
 function render(){
   const t=today();
-  const up=state.events.filter(e=>parse(e.date)>=t).sort((a,b)=>a.date.localeCompare(b.date));
-  const past=state.events.filter(e=>parse(e.date)<t).sort((a,b)=>b.date.localeCompare(a.date));
+  const up=state.events.filter(e=>parse(e.date)>=t).sort((a,b)=>a.date.localeCompare(b.date)||(a.start||'').localeCompare(b.start||''));
+  const past=state.events.filter(e=>parse(e.date)<t).sort((a,b)=>b.date.localeCompare(a.date)||(b.start||'').localeCompare(a.start||''));
 
   // year total
   const y=new Date().getFullYear();
